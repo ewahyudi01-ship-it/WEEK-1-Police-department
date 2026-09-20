@@ -1,10 +1,18 @@
+<?php 
+require("controller_member.php"); // untuk membuat perintah2 di file ini bisa menyambung program ke file lain, in this case file nya: controller_member.php
+if (isset($_GET["updateID"])) {
+  $member_id = $_GET["updateID"];
+  $member = getMemberWithID($member_id);
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add member-Department Police</title>
+    <title>Update member-Department Police</title>
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
@@ -15,10 +23,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="view_member.php">- View member</a>
+          <a class="nav-link" aria-current="page" href="view_member.php">- View member</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="add_member.php">+ Add new member</a>
+          <a class="nav-link" href="viewadd_member.php">+ Add new member</a>
         </li>
       </ul>
     </div>
@@ -32,11 +40,11 @@
 <form method="POST" action="controller_member.php">
   <div class="mb-3">
     <label for="inputNama" class="form-label">Member name</label>
-    <input class="form-control" name="inputName">
+    <input class="form-control" name="inputName" value="<?=$member->name?>">
   </div>
 
   <select class="form-select-rank" aria-label="Large select example" name="inputrank">
-        <option selected>Rank officer</option>
+        <option selected><?=$member->rank?></option>
         <option value="Captain">Captain</option>
         <option value="Liutenant">Liutenant</option>
         <option value="Corporal">Corporal</option>
@@ -45,13 +53,14 @@
   
 
     <select class="form-select-office" aria-label="Large select example" name="inputoffice">
-        <option selected>Offices origin</option>
+        <option selected><?=$member->office?></option>
         <option value="Office A">Office A</option>
         <option value="Office B">Office B</option>
         <option value="Office C">Office C</option>
     </select>
 
-  <button name="btn_register" type="submit" class="btn btn-primary">Register</button>
+  <input type ="hidden" name="input_id" value="<?=$member_id?>">  <!-- hidden supaya user tidak bisa melihat, melainkan cuman back end saja -->
+  <button name="btn_update" type="submit" class="btn btn-primary">Update</button>
 
 </form>
 

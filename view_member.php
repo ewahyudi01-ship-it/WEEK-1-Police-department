@@ -22,7 +22,7 @@
           <a class="nav-link active" aria-current="page" href="view_member.php">- View member</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="add_member.php">+ Add new member</a>
+          <a class="nav-link" href="viewadd_member.php">+ Add new member</a>
         </li>
       </ul>
     </div>
@@ -66,8 +66,15 @@
       <td><?=$member->rank?></td>
       <td><?=$member->office?></td>
       <td>
-      <button class ="btn btn-warning">Update</button>
-      <button class ="btn btn-danger">Delete</button>
+
+      <a href="viewupdate_member.php?updateID=<?=$index?>">
+        <button class ="btn btn-warning">Update</button>
+      </a>
+
+      <a href="controller_member.php?deleteID=<?=$index?>">
+        <button class ="btn btn-danger">Delete</button>
+      </a>
+
       </td>
     </tr>
 
